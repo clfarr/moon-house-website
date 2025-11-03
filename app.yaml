@@ -1,0 +1,20 @@
+# Google Cloud App Engine configuration for Moon House website
+
+runtime: nodejs20
+env: standard
+
+instance_class: F1
+
+handlers:
+  - url: /.*
+    script: auto
+    secure: always
+
+env_variables:
+  NODE_ENV: 'production'
+
+automatic_scaling:
+  min_idle_instances: 0
+  max_idle_instances: 1
+  min_pending_latency: automatic
+  max_pending_latency: automatic
