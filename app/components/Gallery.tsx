@@ -38,21 +38,14 @@ export default function Gallery() {
           {foodImages.map((image, index) => (
             <div
               key={index}
-              className="relative aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition-transform hover:scale-105"
+              className="overflow-hidden rounded-lg shadow-lg cursor-pointer"
               onClick={() => setSelectedImage(image)}
             >
-              <Image
+              <img
                 src={image.src}
                 alt={image.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                style={{ width: '100%', height: '400px', objectFit: 'cover' }}
               />
-              <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all flex items-end">
-                <p className="text-white font-semibold p-4 opacity-0 hover:opacity-100 transition-opacity">
-                  {image.alt}
-                </p>
-              </div>
             </div>
           ))}
         </div>
@@ -64,13 +57,11 @@ export default function Gallery() {
           className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-w-5xl max-h-[90vh] w-full h-full">
-            <Image
+          <div className="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
+            <img
               src={selectedImage.src}
               alt={selectedImage.alt}
-              fill
-              className="object-contain"
-              sizes="90vw"
+              className="max-w-full max-h-[90vh] object-contain"
             />
             <button
               className="absolute top-4 right-4 text-white text-4xl hover:text-moon-yellow"

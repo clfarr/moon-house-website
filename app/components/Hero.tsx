@@ -6,20 +6,25 @@ export default function Hero() {
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/about/Moon House Building outside.jpg"
-          alt="Moon House Building"
-          fill
-          className="object-cover brightness-50"
-          priority
-        />
-      </div>
+      <img
+        src="/images/about/Moon House Building outside.jpg"
+        alt="Moon House Building"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          filter: 'brightness(0.5)',
+          zIndex: 0
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4">
         <div className="mb-8">
-          <Image
+          <img
             src="/images/Moon House Logo.jpg"
             alt="Moon House Logo"
             width={200}

@@ -13,7 +13,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <Image
+            <img
               src="/images/Moon House Logo.jpg"
               alt="Moon House Logo"
               width={60}
