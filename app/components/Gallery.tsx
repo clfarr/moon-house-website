@@ -24,28 +24,32 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   return (
-    <section id="gallery" className="py-20 bg-moon-cream">
+    <section id="gallery" className="py-12 sm:py-20 bg-moon-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-moon-teal mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-moon-teal mb-3 sm:mb-4">
           Our Delicious Creations
         </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-2">
           Made with local organic produce, our menu features rice & quinoa bowls,
           Moon Pitas, protein waffles & more!
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {foodImages.map((image, index) => (
             <div
               key={index}
-              className="overflow-hidden rounded-lg shadow-lg cursor-pointer"
+              className="overflow-hidden rounded-lg shadow-lg cursor-pointer active:opacity-80 transition"
               onClick={() => setSelectedImage(image)}
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+                style={{ width: '100%', height: '280px', objectFit: 'cover' }}
+                className="sm:h-[400px]"
               />
+              <div className="bg-moon-teal text-white p-3 sm:hidden">
+                <p className="font-semibold text-sm">{image.alt}</p>
+              </div>
             </div>
           ))}
         </div>

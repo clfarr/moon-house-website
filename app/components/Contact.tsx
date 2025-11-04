@@ -1,17 +1,17 @@
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-12 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-moon-teal mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-moon-teal mb-8 sm:mb-12">
           Visit Us
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div className="space-y-6 sm:space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-moon-teal mb-4">Location</h3>
-              <p className="text-lg text-gray-700">
+              <h3 className="text-xl sm:text-2xl font-bold text-moon-teal mb-3 sm:mb-4">📍 Location</h3>
+              <p className="text-base sm:text-lg text-gray-700">
                 30891 State HWY 3<br />
                 Weaverville, CA<br />
                 United States
@@ -19,24 +19,24 @@ export default function Contact() {
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-moon-teal mb-4">Contact</h3>
-              <p className="text-lg text-gray-700">
+              <h3 className="text-xl sm:text-2xl font-bold text-moon-teal mb-3 sm:mb-4">📞 Contact</h3>
+              <p className="text-base sm:text-lg text-gray-700 mb-2">
                 <strong>Phone:</strong>{' '}
-                <a href="tel:530-784-0408" className="text-moon-teal-light hover:underline">
+                <a href="tel:530-784-0408" className="text-moon-teal-light hover:underline active:underline">
                   530-784-0408
                 </a>
               </p>
-              <p className="text-lg text-gray-700">
+              <p className="text-base sm:text-lg text-gray-700">
                 <strong>Email:</strong>{' '}
-                <a href="mailto:moonhousetrinity@gmail.com" className="text-moon-teal-light hover:underline">
+                <a href="mailto:moonhousetrinity@gmail.com" className="text-moon-teal-light hover:underline active:underline break-all">
                   moonhousetrinity@gmail.com
                 </a>
               </p>
             </div>
 
             <div>
-              <h3 className="text-2xl font-bold text-moon-teal mb-4">Hours</h3>
-              <p className="text-lg text-gray-700">
+              <h3 className="text-xl sm:text-2xl font-bold text-moon-teal mb-3 sm:mb-4">🕒 Hours</h3>
+              <p className="text-base sm:text-lg text-gray-700">
                 Check our social media for current hours
               </p>
             </div>
@@ -86,14 +86,14 @@ export default function Contact() {
 
           {/* Map placeholder - in production, use Google Maps embed */}
           <div>
-            <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
+            <div className="bg-gray-200 rounded-lg h-64 sm:h-96 flex items-center justify-center">
               <a
                 href="https://www.google.com/maps/search/?api=1&query=30891+State+HWY+3,+Weaverville,+CA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-3 px-6 rounded-full transition"
+                className="bg-moon-teal hover:bg-moon-teal-dark active:bg-moon-teal-dark text-white font-bold py-4 px-8 text-lg rounded-full transition shadow-lg"
               >
-                Open in Google Maps
+                🗺️ Open in Google Maps
               </a>
             </div>
           </div>

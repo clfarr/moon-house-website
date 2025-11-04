@@ -71,70 +71,72 @@ export default function Rewards() {
   const progressToNextReward = rewards.points % 100;
 
   return (
-    <section id="rewards" className="py-20 bg-gradient-to-br from-moon-teal to-moon-teal-dark text-white">
+    <section id="rewards" className="py-12 sm:py-20 bg-gradient-to-br from-moon-teal to-moon-teal-dark text-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-3 sm:mb-4">
           Moon Rewards
         </h2>
-        <p className="text-center text-moon-yellow mb-12 text-lg">
+        <p className="text-center text-moon-yellow mb-8 sm:mb-12 text-base sm:text-lg px-2">
           Earn 10 points per coffee/tea/drink purchase. Get a FREE drink at 100 points!
         </p>
 
         {!isRegistered ? (
-          <div className="bg-white text-gray-800 rounded-lg shadow-xl p-8">
+          <div className="bg-white text-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
             {!showRegisterForm ? (
               <div className="text-center">
-                <h3 className="text-2xl font-bold mb-4 text-moon-teal">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 text-moon-teal">
                   Join Moon Rewards Today!
                 </h3>
-                <p className="mb-6">
+                <p className="mb-6 text-sm sm:text-base">
                   Start earning points on every coffee, tea, and drink purchase.
                 </p>
                 <button
                   onClick={() => setShowRegisterForm(true)}
-                  className="bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-3 px-8 rounded-full transition"
+                  className="w-full sm:w-auto bg-moon-teal hover:bg-moon-teal-dark active:bg-moon-teal-dark text-white font-bold py-4 px-8 text-lg rounded-full transition"
                 >
                   Sign Up Now
                 </button>
               </div>
             ) : (
               <form onSubmit={handleRegister} className="space-y-4">
-                <h3 className="text-2xl font-bold mb-4 text-moon-teal">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 text-moon-teal">
                   Create Your Account
                 </h3>
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Full Name
+                  <label className="block text-sm sm:text-base font-medium mb-2">
+                    Full Name *
                   </label>
                   <input
                     type="text"
                     name="name"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal"
+                    className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal focus:border-moon-teal"
+                    placeholder="Enter your name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Email Address
+                  <label className="block text-sm sm:text-base font-medium mb-2">
+                    Email Address *
                   </label>
                   <input
                     type="email"
                     name="email"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal"
+                    className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal focus:border-moon-teal"
+                    placeholder="your@email.com"
                   />
                 </div>
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     type="submit"
-                    className="flex-1 bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-3 rounded-full transition"
+                    className="flex-1 bg-moon-teal hover:bg-moon-teal-dark active:bg-moon-teal-dark text-white font-bold py-4 text-lg rounded-full transition"
                   >
                     Join Rewards
                   </button>
                   <button
                     type="button"
                     onClick={() => setShowRegisterForm(false)}
-                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 rounded-full transition"
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 active:bg-gray-400 text-gray-800 font-bold py-4 text-lg rounded-full transition"
                   >
                     Cancel
                   </button>
@@ -143,26 +145,26 @@ export default function Rewards() {
             )}
           </div>
         ) : (
-          <div className="bg-white text-gray-800 rounded-lg shadow-xl p-8">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-moon-teal mb-2">
+          <div className="bg-white text-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
+            <div className="text-center mb-6 sm:mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-moon-teal mb-2">
                 Welcome back, {rewards.name}!
               </h3>
-              <p className="text-gray-600">{rewards.email}</p>
+              <p className="text-gray-600 text-sm sm:text-base">{rewards.email}</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-gradient-to-br from-moon-yellow to-moon-yellow-dark p-6 rounded-lg text-center">
-                <div className="text-4xl font-bold text-moon-teal-dark">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+              <div className="bg-gradient-to-br from-moon-yellow to-moon-yellow-dark p-4 sm:p-6 rounded-lg text-center">
+                <div className="text-3xl sm:text-4xl font-bold text-moon-teal-dark">
                   {rewards.points}
                 </div>
-                <div className="text-moon-teal-dark font-semibold">
+                <div className="text-moon-teal-dark font-semibold text-sm sm:text-base">
                   Total Points
                 </div>
               </div>
-              <div className="bg-gradient-to-br from-moon-teal to-moon-teal-light p-6 rounded-lg text-center text-white">
-                <div className="text-4xl font-bold">{rewards.purchases}</div>
-                <div className="font-semibold">Purchases</div>
+              <div className="bg-gradient-to-br from-moon-teal to-moon-teal-light p-4 sm:p-6 rounded-lg text-center text-white">
+                <div className="text-3xl sm:text-4xl font-bold">{rewards.purchases}</div>
+                <div className="font-semibold text-sm sm:text-base">Purchases</div>
               </div>
             </div>
 
@@ -192,20 +194,20 @@ export default function Rewards() {
               </div>
             )}
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button
                 onClick={addPurchase}
-                className="flex-1 bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-3 rounded-full transition"
+                className="flex-1 bg-moon-teal hover:bg-moon-teal-dark active:bg-moon-teal-dark text-white font-bold py-4 text-lg rounded-full transition"
               >
                 Add Purchase (+10 pts)
               </button>
               <button
                 onClick={redeemReward}
                 disabled={rewards.points < 100}
-                className={`flex-1 font-bold py-3 rounded-full transition ${
+                className={`flex-1 font-bold py-4 text-lg rounded-full transition ${
                   rewards.points >= 100
-                    ? 'bg-moon-yellow hover:bg-moon-yellow-dark text-moon-teal-dark'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    ? 'bg-moon-yellow hover:bg-moon-yellow-dark active:bg-moon-yellow-dark text-moon-teal-dark'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed opacity-60'
                 }`}
               >
                 Redeem (100 pts)

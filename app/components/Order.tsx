@@ -115,45 +115,47 @@ export default function Order() {
   };
 
   return (
-    <section id="order" className="py-20 bg-white">
+    <section id="order" className="py-12 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-moon-teal mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-moon-teal mb-3 sm:mb-4">
           Order Online
         </h2>
-        <p className="text-center text-gray-600 mb-12">
+        <p className="text-center text-gray-600 mb-8 sm:mb-12 text-sm sm:text-base">
           Browse our menu and place your order for pickup
         </p>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-2 rounded-full font-semibold transition ${
-                activeCategory === category.id
-                  ? 'bg-moon-teal text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
+        {/* Category Filter - scrollable on mobile */}
+        <div className="overflow-x-auto pb-2 mb-6 sm:mb-8 -mx-4 px-4">
+          <div className="flex gap-2 justify-start sm:justify-center min-w-max sm:min-w-0">
+            {categories.map(category => (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-4 sm:px-6 py-3 rounded-full font-semibold transition text-sm sm:text-base whitespace-nowrap ${
+                  activeCategory === category.id
+                    ? 'bg-moon-teal text-white'
+                    : 'bg-gray-200 text-gray-700 active:bg-gray-300'
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Menu Items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-24 sm:mb-8">
           {filteredItems.map(item => (
-            <div key={item.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition">
-              <h3 className="text-xl font-bold text-moon-teal mb-2">{item.name}</h3>
-              <p className="text-gray-600 mb-4">{item.description}</p>
+            <div key={item.id} className="border-2 border-gray-200 rounded-lg p-4 sm:p-6 shadow-md">
+              <h3 className="text-lg sm:text-xl font-bold text-moon-teal mb-2">{item.name}</h3>
+              <p className="text-gray-600 mb-4 text-sm sm:text-base">{item.description}</p>
               <div className="flex justify-between items-center">
-                <span className="text-2xl font-bold text-moon-teal-dark">
+                <span className="text-xl sm:text-2xl font-bold text-moon-teal-dark">
                   ${item.price.toFixed(2)}
                 </span>
                 <button
                   onClick={() => addToCart(item)}
-                  className="bg-moon-yellow hover:bg-moon-yellow-dark text-moon-teal-dark font-bold py-2 px-6 rounded-full transition"
+                  className="bg-moon-yellow hover:bg-moon-yellow-dark active:bg-moon-yellow-dark text-moon-teal-dark font-bold py-3 px-5 sm:px-6 rounded-full transition text-sm sm:text-base"
                 >
                   Add to Cart
                 </button>
@@ -162,59 +164,62 @@ export default function Order() {
           ))}
         </div>
 
-        {/* Cart Button */}
+        {/* Cart Button - fixed at bottom on mobile */}
         {cart.length > 0 && (
-          <div className="fixed bottom-8 right-8 z-30">
+          <div className="fixed bottom-0 left-0 right-0 sm:bottom-8 sm:left-auto sm:right-8 z-30 p-4 sm:p-0">
             <button
               onClick={() => setShowCart(true)}
-              className="bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-4 px-8 rounded-full shadow-2xl flex items-center gap-2"
+              className="w-full sm:w-auto bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-4 px-6 sm:px-8 rounded-full sm:rounded-full shadow-2xl flex items-center justify-between sm:justify-center gap-3"
             >
-              <span>View Cart ({cart.length})</span>
-              <span className="bg-moon-yellow text-moon-teal-dark px-3 py-1 rounded-full">
+              <span className="text-base sm:text-lg">🛒 Cart ({cart.length})</span>
+              <span className="bg-moon-yellow text-moon-teal-dark px-4 py-2 rounded-full font-bold text-base sm:text-lg">
                 ${cartTotal.toFixed(2)}
               </span>
             </button>
           </div>
         )}
 
-        {/* Cart Modal */}
+        {/* Cart Modal - full screen on mobile */}
         {showCart && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
-                <h3 className="text-2xl font-bold text-moon-teal">Your Order</h3>
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center">
+            <div className="bg-white rounded-t-2xl sm:rounded-lg max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+              <div className="sticky top-0 bg-white border-b p-4 sm:p-6 flex justify-between items-center">
+                <h3 className="text-xl sm:text-2xl font-bold text-moon-teal">Your Order</h3>
                 <button
                   onClick={() => setShowCart(false)}
-                  className="text-3xl text-gray-500 hover:text-gray-700"
+                  className="text-4xl text-gray-500 hover:text-gray-700 w-10 h-10 flex items-center justify-center"
+                  aria-label="Close cart"
                 >
                   &times;
                 </button>
               </div>
 
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {cart.map(item => (
-                  <div key={item.id} className="flex justify-between items-center mb-4 pb-4 border-b">
-                    <div className="flex-1">
-                      <h4 className="font-bold text-moon-teal">{item.name}</h4>
-                      <p className="text-gray-600">${item.price.toFixed(2)}</p>
+                  <div key={item.id} className="flex justify-between items-start sm:items-center mb-4 pb-4 border-b gap-3">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-moon-teal text-sm sm:text-base">{item.name}</h4>
+                      <p className="text-gray-600 text-sm">${item.price.toFixed(2)} each</p>
                     </div>
-                    <div className="flex items-center gap-4">
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full font-bold"
-                      >
-                        -
-                      </button>
-                      <span className="font-bold w-8 text-center">{item.quantity}</span>
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full font-bold"
-                      >
-                        +
-                      </button>
+                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-4">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          className="w-10 h-10 bg-gray-200 active:bg-gray-300 rounded-full font-bold text-lg"
+                        >
+                          -
+                        </button>
+                        <span className="font-bold w-8 text-center text-lg">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="w-10 h-10 bg-gray-200 active:bg-gray-300 rounded-full font-bold text-lg"
+                        >
+                          +
+                        </button>
+                      </div>
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="text-red-600 hover:text-red-800 ml-4"
+                        className="text-red-600 active:text-red-800 text-sm font-semibold underline"
                       >
                         Remove
                       </button>
@@ -222,45 +227,48 @@ export default function Order() {
                   </div>
                 ))}
 
-                <div className="text-right mb-6">
-                  <p className="text-2xl font-bold text-moon-teal">
+                <div className="text-right mb-6 bg-moon-cream p-4 rounded-lg">
+                  <p className="text-xl sm:text-2xl font-bold text-moon-teal">
                     Total: ${cartTotal.toFixed(2)}
                   </p>
                 </div>
 
                 <form onSubmit={handleSubmitOrder} className="space-y-4">
                   <div>
-                    <label className="block font-semibold mb-2">Your Name</label>
+                    <label className="block font-semibold mb-2 text-sm sm:text-base">Your Name *</label>
                     <input
                       type="text"
                       required
                       value={customerInfo.name}
                       onChange={e => setCustomerInfo({...customerInfo, name: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal"
+                      className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal focus:border-moon-teal"
+                      placeholder="Enter your name"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-2">Phone Number</label>
+                    <label className="block font-semibold mb-2 text-sm sm:text-base">Phone Number *</label>
                     <input
                       type="tel"
                       required
                       value={customerInfo.phone}
                       onChange={e => setCustomerInfo({...customerInfo, phone: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal"
+                      className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal focus:border-moon-teal"
+                      placeholder="(555) 123-4567"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold mb-2">Special Instructions (Optional)</label>
+                    <label className="block font-semibold mb-2 text-sm sm:text-base">Special Instructions (Optional)</label>
                     <textarea
                       value={customerInfo.notes}
                       onChange={e => setCustomerInfo({...customerInfo, notes: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal"
+                      className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-moon-teal focus:border-moon-teal"
                       rows={3}
+                      placeholder="Any special requests?"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-4 rounded-full transition"
+                    className="w-full bg-moon-teal hover:bg-moon-teal-dark active:bg-moon-teal-dark text-white font-bold py-4 text-lg rounded-full transition"
                   >
                     Place Order
                   </button>
