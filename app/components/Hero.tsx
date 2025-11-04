@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -43,21 +44,21 @@ export default function Hero() {
           Moon Pitas, protein waffles & full organic coffee bar!
         </p>
         <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center max-w-md mx-auto">
-          <a
-            href="#order"
-            className="w-full sm:w-auto bg-moon-yellow hover:bg-moon-yellow-dark text-moon-teal-dark font-bold py-4 px-10 text-lg rounded-full transition shadow-lg active:scale-95"
+          <Link
+            href="/order"
+            className="w-full sm:w-auto bg-moon-yellow hover:bg-moon-yellow-dark text-moon-teal-dark font-bold py-4 px-10 text-lg rounded-full transition shadow-lg active:scale-95 text-center"
           >
             Order Now
-          </a>
-          <a
-            href="#gallery"
-            className="w-full sm:w-auto bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-4 px-10 text-lg rounded-full transition shadow-lg active:scale-95"
+          </Link>
+          <Link
+            href="/gallery"
+            className="w-full sm:w-auto bg-moon-teal hover:bg-moon-teal-dark text-white font-bold py-4 px-10 text-lg rounded-full transition shadow-lg active:scale-95 text-center"
           >
             View Gallery
-          </a>
+          </Link>
           <a
             href="tel:530-784-0408"
-            className="w-full sm:w-auto bg-white hover:bg-gray-100 text-moon-teal font-bold py-4 px-10 text-lg rounded-full transition shadow-lg active:scale-95"
+            className="w-full sm:w-auto bg-white hover:bg-gray-100 text-moon-teal font-bold py-4 px-10 text-lg rounded-full transition shadow-lg active:scale-95 text-center"
           >
             📞 Call Us
           </a>
@@ -72,22 +73,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-        <a href="#gallery">
-          <svg
-            className="w-8 h-8 text-white"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </a>
-      </div>
     </section>
   );
 }
