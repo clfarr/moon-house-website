@@ -160,8 +160,8 @@ moon-house-website/
 - **Primary Teal:** `#1e5a5a`
 - **Teal Dark:** `#154545`
 - **Teal Light:** `#2d7a7a`
-- **Yellow (Bold Gold):** `#FFD700`
-- **Yellow Dark:** `#FFC107`
+- **Yellow:** `#f0d87f`
+- **Yellow Dark:** `#e6c869`
 - **Cream:** `#fefdf8`
 
 ## Features to Add (Future)
