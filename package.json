@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p ${PORT:-8080}",
-    "lint": "eslint"
+    "lint": "eslint",
+    "gcp-build": "npm run build"
   },
   "dependencies": {
     "react": "19.2.0",
