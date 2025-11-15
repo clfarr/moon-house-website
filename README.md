@@ -11,20 +11,26 @@ Moon House is a board game cafe serving local organic produce filled rice/quinoa
 
 ## Features
 
-### 1. Image Gallery
+### 1. Password Protection
+- Portfolio password protection for controlled access
+- Simple login page with secure authentication
+- Session-based access using HTTP-only cookies
+- Easy password configuration via environment variables
+
+### 2. Image Gallery
 - Beautiful grid layout showcasing food photos
 - Lightbox modal for viewing full-size images
 - Responsive design for all device sizes
 - Click-to-enlarge functionality
 
-### 2. Online Ordering System
+### 3. Online Ordering System
 - Browse menu by categories (Pitas, Bowls, Waffles, Soups, Coffee, Tea, Drinks)
 - Add items to cart with quantity controls
 - Customer information form for order pickup
 - Shopping cart with order summary
 - Real-time total calculation
 
-### 3. Rewards Program
+### 4. Rewards Program
 - Sign up with name and email
 - Earn 10 points per coffee/tea/drink purchase
 - Redeem free drinks at 100 points
@@ -32,13 +38,13 @@ Moon House is a board game cafe serving local organic produce filled rice/quinoa
 - Persistent storage using localStorage
 - Points and purchase history tracking
 
-### 4. Responsive Navigation
+### 5. Responsive Navigation
 - Sticky header with logo
 - Mobile-friendly hamburger menu
 - Smooth scrolling to sections
 - Brand colors (teal and yellow)
 
-### 5. Contact Section
+### 6. Contact Section
 - Location and hours information
 - Phone and email contact
 - Google Maps integration
@@ -71,12 +77,23 @@ cd moon-house-website
 npm install
 ```
 
-3. Run the development server:
+3. Set up environment variables:
+```bash
+# Copy the example environment file
+cp .env.local.example .env.local
+
+# Edit .env.local and set your password
+# Default password is 'demo123' for local development
+```
+
+4. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+6. Enter the password when prompted (default: `demo123`)
 
 ### Build for Production
 
@@ -87,48 +104,37 @@ npm start
 
 ## Deployment
 
-### Google Cloud Platform
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for comprehensive deployment instructions.
 
-1. Install Google Cloud SDK
-2. Build the Next.js app:
+### Quick Start - Google Cloud Run
+
 ```bash
-npm run build
+# Set your password (IMPORTANT!)
+export PROJECT_PASSWORD="your-secure-password"
+
+# Build and deploy
+gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/moon-house
+gcloud run deploy moon-house \
+  --image gcr.io/YOUR_PROJECT_ID/moon-house \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --set-env-vars "PROJECT_PASSWORD=$PROJECT_PASSWORD"
 ```
 
-3. Create an `app.yaml` file:
-```yaml
-runtime: nodejs20
-env: standard
-handlers:
-  - url: /.*
-    script: auto
-    secure: always
-```
+### Password Protection
 
-4. Deploy to App Engine:
-```bash
-gcloud app deploy
-```
+This project includes password protection for portfolio use:
+- Users must enter a password to access the site
+- Password is configured via `PROJECT_PASSWORD` environment variable
+- Default local password: `demo123` (change in `.env.local`)
+- For production, set a secure password during deployment
 
-### Alternative: Docker on Google Cloud Run
-
-1. Create a `Dockerfile`:
-```dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-2. Build and deploy:
-```bash
-gcloud builds submit --tag gcr.io/[PROJECT-ID]/moon-house
-gcloud run deploy moon-house --image gcr.io/[PROJECT-ID]/moon-house --platform managed
-```
+**Security Notes:**
+- Never commit passwords to git
+- Use strong, unique passwords for production
+- Update passwords regularly
+- Share passwords only with intended viewers
 
 ## Project Structure
 

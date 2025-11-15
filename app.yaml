@@ -12,6 +12,9 @@ handlers:
 
 env_variables:
   NODE_ENV: 'production'
+  # IMPORTANT: Set your PROJECT_PASSWORD before deploying
+  # You can set this using: gcloud app deploy --set-env-vars PROJECT_PASSWORD=your-password
+  # Or add it here (not recommended for security reasons)
 
 automatic_scaling:
   min_idle_instances: 0

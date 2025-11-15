@@ -7,6 +7,7 @@ This guide covers deploying the Moon House website to Google Cloud Platform.
 1. Google Cloud account with billing enabled
 2. Google Cloud SDK installed (`gcloud` CLI)
 3. Project ID in Google Cloud Console
+4. **PROJECT_PASSWORD environment variable** - Set your desired password for the portfolio
 
 ## Option 1: Google Cloud Run (Recommended)
 
@@ -35,14 +36,17 @@ gcloud services enable cloudbuild.googleapis.com
 # Build the Docker image
 gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/moon-house
 
-# Deploy to Cloud Run
+# Deploy to Cloud Run with password protection
 gcloud run deploy moon-house \
   --image gcr.io/YOUR_PROJECT_ID/moon-house \
   --platform managed \
   --region us-central1 \
   --allow-unauthenticated \
-  --port 3000
+  --port 3000 \
+  --set-env-vars "PROJECT_PASSWORD=your-secure-password-here"
 ```
+
+**IMPORTANT:** Replace `your-secure-password-here` with your actual password.
 
 5. **Get your URL:**
 After deployment, Cloud Run will provide a URL like:
@@ -70,10 +74,17 @@ gcloud config set project YOUR_PROJECT_ID
 gcloud app create --region=us-central
 ```
 
-3. **Deploy:**
+3. **Deploy with password protection:**
 ```bash
+# Method 1: Set environment variable via command line
+gcloud app deploy --set-env-vars PROJECT_PASSWORD=your-secure-password-here
+
+# Method 2: Update app.yaml with your password and deploy
+# (Edit env_variables in app.yaml first)
 gcloud app deploy
 ```
+
+**IMPORTANT:** Replace `your-secure-password-here` with your actual password.
 
 4. **View your app:**
 ```bash
@@ -128,14 +139,52 @@ gcloud run domain-mappings create \
 2. Add your domain and verify ownership
 3. Update DNS records
 
+## Password Protection
+
+This portfolio project is password-protected. Visitors must enter the correct password to view the site.
+
+### Required Environment Variable:
+- `PROJECT_PASSWORD` - The password required to access the portfolio
+
+### Setting the Password:
+
+**For local development:**
+1. Copy `.env.local.example` to `.env.local`
+2. Update `PROJECT_PASSWORD` with your desired password
+3. The default development password is `demo123`
+
+**For production deployment:**
+
+#### Cloud Run:
+```bash
+gcloud run deploy moon-house \
+  --set-env-vars "PROJECT_PASSWORD=your-secure-password-here"
+```
+
+#### App Engine:
+```bash
+# Option 1: Command line
+gcloud app deploy --set-env-vars PROJECT_PASSWORD=your-secure-password-here
+
+# Option 2: In app.yaml (less secure)
+# Add under env_variables:
+#   PROJECT_PASSWORD: 'your-password'
+```
+
+**Security Notes:**
+- Use a strong, unique password
+- Don't commit passwords to git
+- Update the password regularly
+- Share the password only with intended viewers
+
 ## Environment Variables
 
-If you need to add environment variables:
+If you need to add additional environment variables:
 
 ### Cloud Run:
 ```bash
 gcloud run deploy moon-house \
-  --set-env-vars "NODE_ENV=production,CUSTOM_VAR=value"
+  --set-env-vars "NODE_ENV=production,PROJECT_PASSWORD=your-password,CUSTOM_VAR=value"
 ```
 
 ### App Engine:
@@ -143,6 +192,7 @@ Add to `app.yaml`:
 ```yaml
 env_variables:
   NODE_ENV: 'production'
+  PROJECT_PASSWORD: 'your-password'
   CUSTOM_VAR: 'value'
 ```
 
